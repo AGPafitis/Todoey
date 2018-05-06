@@ -174,6 +174,65 @@ class TodoListViewController: SwipeTableViewController {
         
     }
     
+    //MARK: - Edit Color Scheme
+    
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+
+        
+        
+        let newColour = UIColor.randomFlat.hexValue()
+//        selectedCategory?.colour = newColour
+        
+        do {
+            try realm.write {
+                selectedCategory?.colour = newColour
+            }
+        } catch {
+                print("error saving colour scheme, \(error)")
+            }
+        
+        viewDidLoad()
+        tableView.reloadData()
+        updateNavBar(withHexCode: newColour)
+
+        
+//        searchBar.barTintColor = navBarColour
+        
+        
+//        if let currentCategory = self.selectedCategory {
+//            currentCategory.colour = UIColor.randomFlat.hexValue()
+//            do {
+//                try self.realm.write {
+//                    realm.add(currentCategory, update: true)
+//                }
+//            } catch {
+//                print("Error saving new colour scheme, \(error)")
+//            }
+//        }
+//        self.tableView.reloadData()
+//    }
+        
+    }
+        
+        
+        
+//        selectedCategory?.colour = UIColor.randomFlat.hexValue()
+////        newCategory.colour = UIColor.randomFlat.hexValue()
+//        do {
+//
+//            try realm.write {
+//                realm.add(selectedCategory!, update: true)
+//            }
+//
+//        } catch {
+//
+//            print("Error saving colour, \(error)")
+//        }
+//
+//        tableView.reloadData()
+
+    
+    
     //MARK: - Model Maniplulation Methods
     
     func loadItems() {

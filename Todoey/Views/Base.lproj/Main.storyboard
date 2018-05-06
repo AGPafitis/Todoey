@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -84,11 +85,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="rZM-76-zYz">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="DVn-yQ-bnI">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="MmC-pd-WWo" id="6W6-z2-3Y4"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="DVn-yQ-bnI">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="MmC-pd-WWo" id="6W6-z2-3Y4"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="refresh" id="Z88-1i-Dg2">
+                                <connections>
+                                    <action selector="editButtonPressed:" destination="MmC-pd-WWo" id="cDQ-1C-pNt"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="8rU-BH-M4W" id="QVk-0K-Kcf"/>
