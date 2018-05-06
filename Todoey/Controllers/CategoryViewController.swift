@@ -22,6 +22,10 @@ class CategoryViewController: SwipeTableViewController {
         loadCategories()
         
         tableView.separatorStyle = .none
+        
+        self.tableView.backgroundColor = UIColor.flatMint
+        
+        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
 
     }
     

@@ -27,7 +27,25 @@ class TodoListViewController: SwipeTableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         tableView.separatorStyle = .none
+        searchBar.searchBarStyle = .minimal
         
+        let tableViewBackColour = selectedCategory!.colour
+        
+        let categoryColour = UIColor(hexString: tableViewBackColour)
+        
+        //search bar UI
+        
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = ContrastColorOf(categoryColour!, returnFlat: true)
+        
+//        if let textFieldInsideSearchBarLabel = textFieldInsideSearchBar!.value(forKey: "placeholderLabel") as? UILabel {
+//            textFieldInsideSearchBarLabel.textColor = UIColor.white}
+
+        //background UI
+        let gradientColours = [categoryColour!, categoryColour?.lighten(byPercentage: 0.9)!]
+            
+//        self.tableView.backgroundColor = UIColor(hexString: tableViewBackColour)?.lighten(byPercentage: 0.9)
+        self.tableView.backgroundColor = UIColor(gradientStyle: UIGradientStyle.topToBottom, withFrame: self.tableView.bounds, andColors:gradientColours as! [UIColor])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +61,7 @@ class TodoListViewController: SwipeTableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         
         updateNavBar(withHexCode: "1D9BF6")
+        
     }
     
     //MARK: - Nav Bar Setup Methods
@@ -58,7 +77,10 @@ class TodoListViewController: SwipeTableViewController {
         
         navBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : ContrastColorOf(navBarColour, returnFlat: true)]
         
+        navBar.setValue(true, forKey: "hidesShadow")
+        
         searchBar.barTintColor = navBarColour
+//        searchBar.tintColor = FlatWhite()
     }
     
     //MARK: - Table View Data Source Methods
@@ -77,9 +99,12 @@ class TodoListViewController: SwipeTableViewController {
             if let colour = UIColor(hexString: selectedCategory!.colour)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(todoItems!.count)) {
                 cell.backgroundColor = colour
                 cell.textLabel?.textColor = ContrastColorOf(colour, returnFlat: true)
+                cell.tintColor = ContrastColorOf(colour, returnFlat: true)
             }
             
             cell.accessoryType = item.done ? .checkmark : .none
+            
+            
         } else {
             cell.textLabel?.text = "No Items Added"
         }
