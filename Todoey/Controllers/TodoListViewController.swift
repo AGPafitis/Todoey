@@ -45,7 +45,10 @@ class TodoListViewController: SwipeTableViewController {
         let gradientColours = [categoryColour!, categoryColour?.lighten(byPercentage: 0.9)!]
             
 //        self.tableView.backgroundColor = UIColor(hexString: tableViewBackColour)?.lighten(byPercentage: 0.9)
-        self.tableView.backgroundColor = UIColor(gradientStyle: UIGradientStyle.topToBottom, withFrame: self.tableView.bounds, andColors:gradientColours as! [UIColor])
+        
+        let rect = CGRect(x: 0, y: 0, width: 100, height: 1000)
+        
+        self.tableView.backgroundColor = UIColor(gradientStyle: UIGradientStyle.topToBottom, withFrame: rect, andColors:gradientColours as! [UIColor])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,6 +96,8 @@ class TodoListViewController: SwipeTableViewController {
         
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
+        cell.selectionStyle = .none
+        
         if let item = todoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
             
@@ -129,7 +134,7 @@ class TodoListViewController: SwipeTableViewController {
         
         tableView.reloadData()
         
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK: - Add New Items
